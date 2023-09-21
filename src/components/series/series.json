@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_series_series",
+  "info": {
+    "displayName": "Series",
+    "icon": "play",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "number": {
+      "type": "integer"
+    },
+    "videoUrl": {
+      "type": "string"
+    },
+    "ruSubsUrl": {
+      "type": "string"
+    },
+    "enSubsUrl": {
+      "type": "string"
+    },
+    "zhSubsUrl": {
+      "type": "string"
+    }
+  }
+}

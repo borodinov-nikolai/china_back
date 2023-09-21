@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "serials",
+  "info": {
+    "singularName": "serial",
+    "pluralName": "serials",
+    "displayName": "Serial",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "rate": {
+      "type": "decimal"
+    },
+    "releaseDate": {
+      "type": "date"
+    },
+    "posterUrl": {
+      "type": "string"
+    },
+    "Seazon": {
+      "displayName": "Seazon",
+      "type": "component",
+      "repeatable": true,
+      "component": "seazon.seazon"
+    }
+  }
+}

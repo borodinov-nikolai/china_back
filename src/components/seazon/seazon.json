@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_seazon_seazons",
+  "info": {
+    "displayName": "Seazon",
+    "icon": "stack"
+  },
+  "options": {},
+  "attributes": {
+    "Series": {
+      "displayName": "Series",
+      "type": "component",
+      "repeatable": true,
+      "component": "series.series"
+    },
+    "number": {
+      "type": "integer"
+    }
+  }
+}

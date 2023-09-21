@@ -1,0 +1,5 @@
+/**
+ * srt service
+ */
+
+export default () => ({});

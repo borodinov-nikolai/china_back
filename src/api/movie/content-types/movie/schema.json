@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "movies",
+  "info": {
+    "singularName": "movie",
+    "pluralName": "movies",
+    "displayName": "Movie",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "rate": {
+      "type": "decimal"
+    },
+    "releaseDate": {
+      "type": "date"
+    },
+    "ruSubsUrl": {
+      "type": "string"
+    },
+    "enSubsUrl": {
+      "type": "string"
+    },
+    "zhSubsUrl": {
+      "type": "string"
+    },
+    "posterUrl": {
+      "type": "string"
+    },
+    "videoUrl": {
+      "type": "string"
+    },
+    "hardLevel": {
+      "type": "integer"
+    }
+  }
+}
