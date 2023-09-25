@@ -2,6 +2,8 @@ import fetch from "node-fetch";
 import jose from "node-jose"
 import { private_key } from "./authorized_key.json";
 import fs from 'fs'
+import { Client } from "ssh2";
+
 interface Line {
   id: string;
   startTime: string;
@@ -10,6 +12,45 @@ interface Line {
   endSeconds: number;
   text: string;
 }
+
+
+export const rebuildAndRestart = async () => {
+  try {
+    const conn = new Client();
+        
+    conn
+      .on("ready", () => {
+        conn.exec("cd .. && bash /rebuild.sh", (err, stream) => {
+          if (err) throw err;
+          stream
+            .on("close", (code, signal) => {
+              if (code === 0) {
+                console.log({ message: "Скрипт успешно выполнен" });
+              } else {
+                console.log({
+                  message: "Произошла ошибка при выполнении скрипта",
+                });
+              }
+              conn.end();
+            })
+            .on("data", (data) => {
+              console.log("STDOUT: " + data);
+            })
+            .stderr.on("data", (data) => {
+              console.log("STDERR: " + data);
+            });
+        });
+      })
+      .connect({
+        host: "91.210.169.58",
+        username: "root",
+        password: "ugY8#R5RbvT8@m",
+      });
+  } catch (error) {
+    console.error("Ошибка:", error);
+    console.log({ message: "Произошла ошибка при выполнении скрипта" });
+  }
+};
 
 class Parser {
   seperator = ",";

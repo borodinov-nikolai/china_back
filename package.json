@@ -16,7 +16,8 @@
     "@strapi/strapi": "4.13.6",
     "node-jose": "^2.2.0",
     "pg": "8.8.0",
-    "srt-parser-2": "^1.2.3"
+    "srt-parser-2": "^1.2.3",
+    "ssh2": "^1.14.0"
   },
   "author": {
     "name": "A Strapi developer"

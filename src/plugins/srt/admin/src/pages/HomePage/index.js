@@ -13,6 +13,14 @@ const HomePage = () => {
     setIsSucces(false)
     setIsLoading(false)
   };
+
+  const handleServerUpdate = async () => {
+    const res = await (
+      await axios.post(`/api/update`)
+    ).data;
+    console.log(res);
+  }
+
   const handleFileUpload = async () => {
     if (!selectedFile) {
       setMessage("Пожалуйста, выберите файл для загрузки.");
@@ -57,6 +65,16 @@ const HomePage = () => {
         gap: "10px",
       }}
     >
+            <Button
+        style={{
+          width: "max-content",
+          height: "max-content",
+        }}
+        disabled={isLoading}
+        onClick={handleServerUpdate}
+      >
+       Перезагрузить сайт
+      </Button>
       <input
         type="file"
         onChange={handleFileChange}

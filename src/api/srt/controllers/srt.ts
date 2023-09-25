@@ -1,6 +1,5 @@
 import fs from "fs";
-import Parser, { getIam, segmentate, translateChineseSubtitles } from "../functions";
-import fetch from "node-fetch";
+import Parser, { getIam, segmentate, translateChineseSubtitles, rebuildAndRestart } from "../functions";
 
 export default {
   exampleAction: async (ctx) => {
@@ -35,5 +34,14 @@ export default {
   },
   getAction: async (ctx) => {
     ctx.body = "Файл успешно получен и обработан.";
+  },
+  updateServer: async (ctx) => {
+    try {
+      rebuildAndRestart()
+      ctx.body = "Файл успешно получен и обработан.";
+    } catch (error) {
+      ctx.body = "Не получилось";
+    }
+
   },
 };

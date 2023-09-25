@@ -10,6 +10,15 @@ export default {
      },
     },
     {
+     method: 'POST',
+     path: '/update',
+     handler: 'srt.updateServer',
+     config: {
+       policies: [],
+       middlewares: [],
+     },
+    },
+    {
      method: 'GET',
      path: '/srt',
      handler: 'srt.getAction',
