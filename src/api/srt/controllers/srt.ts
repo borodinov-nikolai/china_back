@@ -12,6 +12,9 @@ export default {
       const segmentated = await segmentate(json);
       const { iamToken } = await getIam()
       await translateChineseSubtitles(json, iamToken)
+      if (fs.existsSync("public/uploads/zh_subtitles.json")) {
+        fs.unlinkSync("public/uploads/zh_subtitles.json");
+      }
       fs.writeFile(
         "public/uploads/zh_subtitles.json",
         JSON.stringify(segmentated, null, 2),

@@ -300,6 +300,13 @@ export async function translateChineseSubtitles(chineseSubtitles, iam_token) {
   const filePathEn = `public/uploads/${target_language_en}_subtitles.json`;
   const filePathRu = `public/uploads/${target_language_ru}_subtitles.json`;
 
+  if (fs.existsSync(filePathEn)) {
+    fs.unlinkSync(filePathEn);
+  }
+  if (fs.existsSync(filePathRu)) {
+    fs.unlinkSync(filePathRu);
+  }
+
   fs.writeFileSync(filePathEn, JSON.stringify(translatedSubtitlesEn, null, 2));
   fs.writeFileSync(filePathRu, JSON.stringify(translatedSubtitlesRu, null, 2));
 }
