@@ -9,5 +9,9 @@ export default {
           sizeLimit: 1024 * 1024 * 1024 // 1gb in bytes
         }
       }
-    }
+    },
+    'control-panel': {
+      enabled: true,
+      resolve: './src/plugins/control-panel'
+    },
   }

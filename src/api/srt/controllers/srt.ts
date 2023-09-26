@@ -37,8 +37,8 @@ export default {
   },
   updateServer: async (ctx) => {
     try {
-      rebuildAndRestart()
-      ctx.body = "Файл успешно получен и обработан.";
+      await rebuildAndRestart()
+      ctx.body = "Сервер успешно перезапущен";
     } catch (error) {
       ctx.body = "Не получилось";
     }

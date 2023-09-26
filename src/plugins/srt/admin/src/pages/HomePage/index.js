@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import pluginId from "../../pluginId";
 import axios from "axios";
 import { Button, Loader } from "@strapi/design-system";
 const HomePage = () => {
@@ -9,17 +8,10 @@ const HomePage = () => {
   const [message, setMessage] = useState("");
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
-    setMessage("")
-    setIsSucces(false)
-    setIsLoading(false)
+    setMessage("");
+    setIsSucces(false);
+    setIsLoading(false);
   };
-
-  const handleServerUpdate = async () => {
-    const res = await (
-      await axios.post(`/api/update`)
-    ).data;
-    console.log(res);
-  }
 
   const handleFileUpload = async () => {
     if (!selectedFile) {
@@ -65,16 +57,6 @@ const HomePage = () => {
         gap: "10px",
       }}
     >
-            <Button
-        style={{
-          width: "max-content",
-          height: "max-content",
-        }}
-        disabled={isLoading}
-        onClick={handleServerUpdate}
-      >
-       Перезагрузить сайт
-      </Button>
       <input
         type="file"
         onChange={handleFileChange}
