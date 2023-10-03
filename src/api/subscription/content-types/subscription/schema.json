@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subscriptions",
+  "info": {
+    "singularName": "subscription",
+    "pluralName": "subscriptions",
+    "displayName": "Subscription",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "dueToDay": {
+      "type": "date",
+      "required": true
+    },
+    "startDay": {
+      "type": "date"
+    },
+    "user_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "subscriptions"
+    },
+    "tariff_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tariff.tariff"
+    }
+  }
+}
