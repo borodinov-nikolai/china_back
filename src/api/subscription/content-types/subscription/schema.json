@@ -19,16 +19,25 @@
     "startDay": {
       "type": "date"
     },
-    "user_id": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "subscriptions"
-    },
     "tariff_id": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::tariff.tariff"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "активна",
+        "ожидается оплата",
+        "отменена"
+      ],
+      "default": "активна"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "subscription"
     }
   }
 }
