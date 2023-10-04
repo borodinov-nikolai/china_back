@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_subscription_subscriptions",
+  "info": {
+    "displayName": "Subscription",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "test": {
+      "type": "string"
+    }
+  }
+}

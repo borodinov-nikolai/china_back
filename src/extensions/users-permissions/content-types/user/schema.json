@@ -9,8 +9,7 @@
     "displayName": "User"
   },
   "options": {
-    "draftAndPublish": false,
-    "timestamps": true
+    "draftAndPublish": false
   },
   "attributes": {
     "username": {
@@ -66,9 +65,9 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "subscriptions": {
+    "subscription": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::subscription.subscription",
       "mappedBy": "user_id"
     }
