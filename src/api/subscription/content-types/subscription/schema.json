@@ -35,9 +35,9 @@
     },
     "user_id": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "subscription"
+      "inversedBy": "subscriptions"
     }
   }
 }

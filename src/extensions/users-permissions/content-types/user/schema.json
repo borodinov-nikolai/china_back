@@ -65,9 +65,9 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "subscription": {
+    "subscriptions": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::subscription.subscription",
       "mappedBy": "user_id"
     }

@@ -2,6 +2,7 @@ import { factories } from "@strapi/strapi";
 import { DefaultContext } from "koa";
 
 export default factories.createCoreController(
+  // ищменить логику начала даты
   "api::subscription.subscription",
   ({ strapi }) => ({
     async createSubscription(ctx: DefaultContext) {
@@ -11,21 +12,21 @@ export default factories.createCoreController(
         31,
         {
           fields: ["username", "email"],
-          populate: { subscription: true },
+          populate: { subscriptions: true },
         }
       );
       console.log(user);
       const { tariff_id } = ctx.request.body;
       const date = new Date();
-      let startDay = !user.subscription
+      let startDay = !user.subscriptions
         ? date.toISOString().split("T")[0]
-        : new Date(user.subscription.startDay);
+        : new Date(user.subscriptions.dueToDay);
       let lastDay;
-      function addMonth(tariff: number) {
-        lastDay = !user.subscription
+      function addMonth(tariffId: number) {
+        lastDay = !user.subscriptions
           ? new Date(date.toISOString().split("T")[0])
-          : new Date(user.subscription.dueToDay);
-        switch (tariff) {
+          : new Date(user.subscriptions.dueToDay);
+        switch (tariffId) {
           case 1:
             return new Date(lastDay.setMonth(lastDay.getMonth() + 1))
               .toISOString()
@@ -40,9 +41,6 @@ export default factories.createCoreController(
               .split("T")[0];
         }
       }
-      // console.log(lastDay , 'last day');
-      // console.log(date.toISOString().split("T")[0], 'isos')
-      // console.log(new Date(user.subscription.dueToDay), "user lsat duetoday");
       const entry = await strapi.entityService.create(
         "api::subscription.subscription",
         {
