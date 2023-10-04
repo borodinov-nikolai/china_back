@@ -33,11 +33,11 @@
       ],
       "default": "активна"
     },
-    "user": {
+    "user_id": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
-      "mappedBy": "subscription"
+      "inversedBy": "subscription"
     }
   }
 }

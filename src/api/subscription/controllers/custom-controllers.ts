@@ -8,38 +8,49 @@ export default factories.createCoreController(
       const currentUser = ctx.state.user.id;
       const user = await strapi.entityService.findOne(
         "plugin::users-permissions.user",
-        currentUser,
+        31,
         {
           fields: ["username", "email"],
           populate: { subscription: true },
         }
       );
+      console.log(user);
       const { tariff_id } = ctx.request.body;
       const date = new Date();
-      const startDay = !user.subscription
+      let startDay = !user.subscription
         ? date.toISOString().split("T")[0]
         : new Date(user.subscription.startDay);
-      function addMonth(dayStart: any, tariff: number) {
-        const newDay = !user.subscription
-          ? new Date(dayStart)
+      let lastDay;
+      function addMonth(tariff: number) {
+        lastDay = !user.subscription
+          ? new Date(date.toISOString().split("T")[0])
           : new Date(user.subscription.dueToDay);
         switch (tariff) {
           case 1:
-            return new Date(newDay.setMonth(newDay.getMonth() + 1));
+            return new Date(lastDay.setMonth(lastDay.getMonth() + 1))
+              .toISOString()
+              .split("T")[0];
           case 2:
-            return new Date(newDay.setMonth(newDay.getMonth() + 3));
+            return new Date(lastDay.setMonth(lastDay.getMonth() + 3))
+              .toISOString()
+              .split("T")[0];
           case 3:
-            return new Date(newDay.setMonth(newDay.getMonth() + 6));
+            return new Date(lastDay.setMonth(lastDay.getMonth() + 6))
+              .toISOString()
+              .split("T")[0];
         }
       }
+      // console.log(lastDay , 'last day');
+      // console.log(date.toISOString().split("T")[0], 'isos')
+      // console.log(new Date(user.subscription.dueToDay), "user lsat duetoday");
       const entry = await strapi.entityService.create(
         "api::subscription.subscription",
         {
           data: {
             startDay,
-            dueToDay: addMonth(startDay, tariff_id),
+            dueToDay: addMonth(tariff_id),
             tariff_id,
-            user: currentUser,
+            user_id: currentUser,
           },
         }
       );
