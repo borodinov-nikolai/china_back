@@ -24,14 +24,9 @@
       "relation": "oneToOne",
       "target": "api::tariff.tariff"
     },
-    "status": {
-      "type": "enumeration",
-      "enum": [
-        "активна",
-        "ожидается оплата",
-        "отменена"
-      ],
-      "default": "активна"
+    "isActive": {
+      "type": "boolean",
+      "default": true
     },
     "user_id": {
       "type": "relation",
