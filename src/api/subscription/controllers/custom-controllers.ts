@@ -10,7 +10,7 @@ export default factories.createCoreController(
       const date = new Date();
       const user = await strapi.entityService.findOne(
         "plugin::users-permissions.user",
-        31,
+        currentUser,
         {
           fields: ["username", "email"],
           populate: { subscriptions: true },
@@ -43,7 +43,7 @@ export default factories.createCoreController(
               .split("T")[0];
         }
       }
-      const entry = await strapi.entityService.create(
+      return await strapi.entityService.create(
         "api::subscription.subscription",
         {
           data: {
@@ -54,7 +54,6 @@ export default factories.createCoreController(
           },
         }
       );
-      return entry;
     },
   })
 );

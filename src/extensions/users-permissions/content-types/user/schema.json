@@ -70,6 +70,12 @@
       "relation": "oneToMany",
       "target": "api::subscription.subscription",
       "mappedBy": "user_id"
+    },
+    "limitation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::limitation.limitation",
+      "mappedBy": "users_permissions_user"
     }
   }
 }
