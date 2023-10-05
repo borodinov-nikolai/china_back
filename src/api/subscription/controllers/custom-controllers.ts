@@ -18,14 +18,19 @@ export default factories.createCoreController(
       console.log(user);
       const { tariff_id } = ctx.request.body;
       const date = new Date();
-      let startDay = !user.subscriptions
-        ? date.toISOString().split("T")[0]
-        : new Date(user.subscriptions.dueToDay);
-      let lastDay;
+      let startDay =
+        user.subscriptions.length > 0
+          ? new Date(user.subscriptions.at(-1).dueToDay)
+          : new Date(date.toISOString().split("T")[0]);
+      let lastDay =
+        user.subscriptions.length > 0
+          ? new Date(user.subscriptions.at(-1).dueToDay)
+          : new Date(date.toISOString().split("T")[0]);
+      console.log(user.subscriptions);
+      // console.log(lastDay, "lsatday");
+      // console.log(startDay, "startday");
+
       function addMonth(tariffId: number) {
-        lastDay = !user.subscriptions
-          ? new Date(date.toISOString().split("T")[0])
-          : new Date(user.subscriptions.dueToDay);
         switch (tariffId) {
           case 1:
             return new Date(lastDay.setMonth(lastDay.getMonth() + 1))
