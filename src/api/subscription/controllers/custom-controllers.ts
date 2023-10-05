@@ -2,11 +2,12 @@ import { factories } from "@strapi/strapi";
 import { DefaultContext } from "koa";
 
 export default factories.createCoreController(
-  // ищменить логику начала даты
   "api::subscription.subscription",
   ({ strapi }) => ({
     async createSubscription(ctx: DefaultContext) {
       const currentUser = ctx.state.user.id;
+      const { tariff_id } = ctx.request.body;
+      const date = new Date();
       const user = await strapi.entityService.findOne(
         "plugin::users-permissions.user",
         31,
@@ -15,20 +16,16 @@ export default factories.createCoreController(
           populate: { subscriptions: true },
         }
       );
-      console.log(user);
-      const { tariff_id } = ctx.request.body;
-      const date = new Date();
+      // какого дня оформлена подписка
       let startDay =
         user.subscriptions.length > 0
           ? new Date(user.subscriptions.at(-1).dueToDay)
           : new Date(date.toISOString().split("T")[0]);
+      // от какого числа продливать подписку
       let lastDay =
         user.subscriptions.length > 0
           ? new Date(user.subscriptions.at(-1).dueToDay)
           : new Date(date.toISOString().split("T")[0]);
-      console.log(user.subscriptions);
-      // console.log(lastDay, "lsatday");
-      // console.log(startDay, "startday");
 
       function addMonth(tariffId: number) {
         switch (tariffId) {
