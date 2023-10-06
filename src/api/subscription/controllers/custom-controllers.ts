@@ -1,10 +1,9 @@
 import { factories } from "@strapi/strapi";
-import { DefaultContext } from "koa";
 
 export default factories.createCoreController(
   "api::subscription.subscription",
   ({ strapi }) => ({
-    async createSubscription(ctx: DefaultContext) {
+    async createSubscription(ctx) {
       const currentUser = ctx.state.user.id;
       const { tariff_id } = ctx.request.body;
       const date = new Date();

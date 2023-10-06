@@ -18,7 +18,7 @@ const emailTemplate = (user) => {
 
 export default {
 
-  myJob: {
+  email: {
     task: async ({strapi}) => {
       const array = await strapi.entityService.findMany(
         "plugin::users-permissions.user",
@@ -45,7 +45,6 @@ export default {
         );
         return dueToDay < threeDaysFromNow;
       });
-      console.log(filteredUsers)
       for (const user of filteredUsers) {
         await strapi.plugins['email'].services.email.sendTemplatedEmail({
             to: user.email
@@ -55,6 +54,18 @@ export default {
     },
     options: {
       rule: "0 9 * * *",
+    },
+  },
+  translateLimit: {
+    task: async ({strapi}) => {
+      await strapi.db.query("api::limitation.limitation").updateMany({
+        data: {
+          translateLimit: 40,
+        },
+      });
+    },
+    options: {
+      rule: "0 0 * * *",
     },
   },
 };
