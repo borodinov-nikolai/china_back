@@ -43,7 +43,7 @@ export default {
           dueToDayParts[1] - 1, // месяц
           dueToDayParts[2] // день
         );
-        return dueToDay < threeDaysFromNow;
+        return dueToDay < threeDaysFromNow && dueToDay >= currentDate;
       });
       for (const user of filteredUsers) {
         await strapi.plugins['email'].services.email.sendTemplatedEmail({

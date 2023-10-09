@@ -4,7 +4,8 @@
   "info": {
     "singularName": "limitation",
     "pluralName": "limitations",
-    "displayName": "Limitation"
+    "displayName": "Limitation",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -12,13 +13,18 @@
   "pluginOptions": {},
   "attributes": {
     "translateLimit": {
-      "type": "integer"
+      "type": "integer",
+      "default": 40
     },
     "users_permissions_user": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "limitation"
+    },
+    "watchLimit": {
+      "type": "integer",
+      "default": 10
     }
   }
 }
