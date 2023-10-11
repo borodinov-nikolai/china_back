@@ -56,11 +56,12 @@ export default {
       rule: "0 9 * * *",
     },
   },
-  translateLimit: {
+  limits: {
     task: async ({strapi}) => {
       await strapi.db.query("api::limitation.limitation").updateMany({
         data: {
           translateLimit: 40,
+          watchLimit: 15,
         },
       });
     },

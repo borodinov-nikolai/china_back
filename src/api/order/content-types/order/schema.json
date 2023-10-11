@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "isPayed": {
+      "type": "boolean"
+    },
+    "tariff_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "integer"
+    },
+    "payment_id": {
+      "type": "string"
+    }
+  }
+}

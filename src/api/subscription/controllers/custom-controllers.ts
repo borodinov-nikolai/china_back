@@ -1,18 +1,18 @@
-import { factories } from "@strapi/strapi";
+import {factories} from "@strapi/strapi";
 
 export default factories.createCoreController(
   "api::subscription.subscription",
-  ({ strapi }) => ({
+  ({strapi}) => ({
     async createSubscription(ctx) {
       const currentUser = ctx.state.user.id;
-      const { tariff_id } = ctx.request.body;
+      const {tariff_id} = ctx.request.body;
       const date = new Date();
       const user = await strapi.entityService.findOne(
         "plugin::users-permissions.user",
         currentUser,
         {
           fields: ["username", "email"],
-          populate: { subscriptions: true },
+          populate: {subscriptions: true},
         }
       );
       // какого дня оформлена подписка
@@ -42,6 +42,7 @@ export default factories.createCoreController(
               .split("T")[0];
         }
       }
+
       return await strapi.entityService.create(
         "api::subscription.subscription",
         {
@@ -54,5 +55,23 @@ export default factories.createCoreController(
         }
       );
     },
+    async createOrder(ctx) {
+      const userId = ctx.state.user.id;
+      const {data} = ctx.request.body;
+      const  {tariff_id, payment_id} = data
+      const order = await strapi.entityService.create("api::order.order", {
+        data:
+          {
+            isPayed: false,
+            payment_id: payment_id,
+            tariff_id: tariff_id,
+            user_id: userId
+          }
+      })
+        return order;
+    },
+    async payOrder(ctx) {
+      console.log(ctx)
+    }
   })
 );
