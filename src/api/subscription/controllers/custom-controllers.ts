@@ -71,7 +71,7 @@ export default factories.createCoreController(
         return order;
     },
     async payOrder(ctx) {
-      console.log(ctx)
+      console.log(ctx.request.body)
     }
   })
 );
