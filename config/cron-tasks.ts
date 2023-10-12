@@ -64,6 +64,28 @@ export default {
           watchLimit: 15,
         },
       });
+      const subscriptions = await strapi.db.query("api::subscription.subscription").findMany();
+      const currentDate = new Date();
+      await subscriptions.forEach(async (subscription) => {
+        const startDay = new Date(subscription.startDay);
+        const dueToDay = new Date(subscription.dueToDay);
+
+        if (currentDate >= startDay && currentDate <= dueToDay) {
+          await strapi.entityService.update('api::subscription.subscription', subscription.id, {
+            data: {
+              isActive: true,
+            },
+          });
+        } else {
+          await strapi.entityService.update('api::subscription.subscription', subscription.id, {
+            data: {
+              isActive: false,
+            },
+          });
+        }
+        console.log(subscription)
+      })
+
     },
     options: {
       rule: "0 0 * * *",

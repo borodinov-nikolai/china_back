@@ -15,8 +15,12 @@
     "@strapi/provider-email-nodemailer": "^4.13.7",
     "@strapi/provider-upload-aws-s3": "^4.13.7",
     "@strapi/strapi": "4.13.6",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-unused-imports": "^3.0.0",
     "node-jose": "^2.2.0",
     "pg": "8.8.0",
+    "prettier": "^3.0.3",
     "srt-parser-2": "^1.2.3",
     "ssh2": "^1.14.0"
   },
