@@ -23,6 +23,7 @@ export default factories.createCoreService('api::dictionary.dictionary', ({strap
       dictionary.word = [];
     }
 
+    dictionary.word.push(wordObject)
 
     await strapi.entityService.update('api::dictionary.dictionary', dictionary.id, {
       data: {
