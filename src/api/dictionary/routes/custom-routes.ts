@@ -21,8 +21,8 @@ export default  {
       },
     },
     {
-      method: "get",
-      path: "/dictionary/get",
+      method: "GET",
+      path: "/dictionary/getDictionary",
       handler: "dictionary.getDictionary",
       config: {
         policies: [],

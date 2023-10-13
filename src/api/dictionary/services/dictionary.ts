@@ -56,7 +56,7 @@ export default factories.createCoreService('api::dictionary.dictionary', ({strap
       where: {user_id: userId},
       populate: true,
     })
-
+    console.log(123)
     if (!dictionary) {
       dictionary = await strapi.entityService.create('api::dictionary.dictionary', {
         data: {
