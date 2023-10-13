@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dictionaries",
+  "info": {
+    "singularName": "dictionary",
+    "pluralName": "dictionaries",
+    "displayName": "Dictionary",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "word": {
+      "displayName": "Word",
+      "type": "component",
+      "repeatable": true,
+      "component": "word.word"
+    },
+    "user_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "dictionary"
+    }
+  }
+}

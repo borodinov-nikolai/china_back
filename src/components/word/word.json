@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_word_words",
+  "info": {
+    "displayName": "Word",
+    "icon": "write"
+  },
+  "options": {},
+  "attributes": {
+    "wordOnChinese": {
+      "type": "string"
+    },
+    "wordOnRu": {
+      "type": "string"
+    },
+    "wordOnEn": {
+      "type": "string"
+    }
+  }
+}
