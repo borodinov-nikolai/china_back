@@ -20,5 +20,14 @@ export default  {
         middlewares: [],
       },
     },
+    {
+      method: "get",
+      path: "/dictionary/get",
+      handler: "dictionary.getDictionary",
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
   ],
 };

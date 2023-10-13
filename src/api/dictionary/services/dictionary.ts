@@ -50,5 +50,21 @@ export default factories.createCoreService('api::dictionary.dictionary', ({strap
     console.log(dictionary)
 
     return dictionary;
+  },
+  async getDictionary(userId) {
+    let dictionary = await strapi.db.query("api::dictionary.dictionary").findOne({
+      where: {user_id: userId},
+      populate: true,
+    })
+
+    if (!dictionary) {
+      dictionary = await strapi.entityService.create('api::dictionary.dictionary', {
+        data: {
+          user_id: userId,
+          words: []
+        }
+      })
+    }
+    return dictionary;
   }
 }));
