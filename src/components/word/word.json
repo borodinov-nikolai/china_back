@@ -2,7 +2,8 @@
   "collectionName": "components_word_words",
   "info": {
     "displayName": "Word",
-    "icon": "write"
+    "icon": "write",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -13,6 +14,9 @@
       "type": "string"
     },
     "wordOnEn": {
+      "type": "string"
+    },
+    "pinyin": {
       "type": "string"
     }
   }
