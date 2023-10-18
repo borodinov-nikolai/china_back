@@ -12,6 +12,15 @@ export default  {
       },
     },
     {
+      method: "GET",
+      path: "/dictionary/getRandomTest",
+      handler: "dictionary.getRandomTest",
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
+    {
       method: "DELETE",
       path: "/dictionary/deleteWord/:wordId",
       handler: "dictionary.deleteWord",

@@ -18,5 +18,9 @@ export default factories.createCoreController('api::dictionary.dictionary', ({ s
   async getDictionary(ctx) {
     const userId = ctx.state.user.id;
     return await strapi.service('api::dictionary.dictionary').getDictionary(userId);
+  },
+  async getRandomTest(ctx) {
+    const userId = ctx.state.user.id;
+    return await strapi.service('api::dictionary.dictionary').getRandomTest(userId);
   }
 }));

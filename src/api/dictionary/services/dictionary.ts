@@ -3,6 +3,7 @@
  */
 
 import {factories} from '@strapi/strapi';
+import {getRandomWords} from "../functions/getRandomWords";
 
 export default factories.createCoreService('api::dictionary.dictionary', ({strapi}) => ({
   async addWord(wordObject, userId) {
@@ -66,5 +67,13 @@ export default factories.createCoreService('api::dictionary.dictionary', ({strap
       })
     }
     return dictionary;
+  },
+  async getRandomTest(userId: number) {
+    const dictionary = await strapi.db.query("api::dictionary.dictionary").findOne({
+      where: {user_id: userId},
+      populate: true,
+    })
+    const words = dictionary.word;
+    return getRandomWords(words, 5);
   }
 }));
