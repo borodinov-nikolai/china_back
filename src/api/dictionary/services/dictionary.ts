@@ -3,10 +3,10 @@
  */
 
 import {factories} from '@strapi/strapi';
-import {getRandomWords} from "../functions/getRandomWords";
+import {getWords} from "../functions/getRandomWords";
 
 export default factories.createCoreService('api::dictionary.dictionary', ({strapi}) => ({
-  async addWord(wordObject, userId) {
+  async addWord(wordObject, userId: number) {
     let dictionary = await strapi.db.query("api::dictionary.dictionary").findOne({
       where: {user_id: userId},
       populate: true,
@@ -34,7 +34,7 @@ export default factories.createCoreService('api::dictionary.dictionary', ({strap
 
     return dictionary;
   },
-  async deleteWord(wordId, userId) {
+  async deleteWord(wordId: number, userId: number) {
     let dictionary = await strapi.db.query("api::dictionary.dictionary").findOne({
       where: {user_id: userId},
       populate: true,
@@ -52,7 +52,7 @@ export default factories.createCoreService('api::dictionary.dictionary', ({strap
 
     return dictionary;
   },
-  async getDictionary(userId) {
+  async getDictionary(userId: number) {
     let dictionary = await strapi.db.query("api::dictionary.dictionary").findOne({
       where: {user_id: userId},
       populate: true,
@@ -68,12 +68,46 @@ export default factories.createCoreService('api::dictionary.dictionary', ({strap
     }
     return dictionary;
   },
-  async getRandomTest(userId: number) {
+  async getTest(userId: number) {
+    let test = await strapi.db.query("api::test.test").findOne({
+      where: {user_id: userId, isActive: true},
+      populate: true,
+    })
+    if (test) {
+      return test
+    }
     const dictionary = await strapi.db.query("api::dictionary.dictionary").findOne({
       where: {user_id: userId},
       populate: true,
     })
     const words = dictionary.word;
-    return getRandomWords(words, 5);
+    if (words.length < 5) {
+      return {
+        error: true,
+        message: "You need to add at least 5 words to the dictionary"
+      }
+    }
+    const randomWords = getWords(words, 5);
+    await strapi.entityService.create('api::test.test', {
+      data: {
+        user_id: userId,
+        words: randomWords,
+        isActive: true
+      }
+    })
+    return await strapi.db.query("api::test.test").findOne({
+      where: {user_id: userId, isActive: true},
+      populate: true,
+    })
+  },
+  async endTest(userId: number) {
+    let test = await strapi.db.query("api::test.test").findOne({
+      where: {user_id: userId, isActive: true},
+      populate: true,
+    })
+
+    return await strapi.entityService.update("api::test.test", test.id, {
+      data: {isActive: false}
+    })
   }
 }));

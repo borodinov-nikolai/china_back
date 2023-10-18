@@ -82,6 +82,12 @@
       "relation": "oneToOne",
       "target": "api::dictionary.dictionary",
       "mappedBy": "user_id"
+    },
+    "tests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::test.test",
+      "mappedBy": "user_id"
     }
   }
 }

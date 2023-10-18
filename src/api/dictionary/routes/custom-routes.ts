@@ -12,9 +12,18 @@ export default  {
       },
     },
     {
-      method: "GET",
-      path: "/dictionary/getRandomTest",
-      handler: "dictionary.getRandomTest",
+      method: "POST",
+      path: "/dictionary/getTest",
+      handler: "dictionary.getTest",
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
+    {
+      method: "PATCH",
+      path: "/dictionary/endTest",
+      handler: "dictionary.endTest",
       config: {
         policies: [],
         middlewares: [],

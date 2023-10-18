@@ -4,7 +4,7 @@ interface Word {
   wordOnRu: string;
   wordOnEn: string;
 }
-export function getRandomWords(words: Word[], count: number): Word[] {
+export function getWords(words: Word[], count: number): Word[] {
   if (words.length <= count) {
     return words;
   }
