@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tests",
+  "info": {
+    "singularName": "test",
+    "pluralName": "tests",
+    "displayName": "Test",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "words": {
+      "type": "component",
+      "repeatable": true,
+      "component": "word.word"
+    },
+    "user_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "tests"
+    },
+    "isActive": {
+      "type": "boolean"
+    }
+  }
+}
