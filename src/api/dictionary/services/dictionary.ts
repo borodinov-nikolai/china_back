@@ -106,8 +106,12 @@ export default factories.createCoreService('api::dictionary.dictionary', ({strap
       populate: true,
     })
 
-    return await strapi.entityService.update("api::test.test", test.id, {
+    await strapi.entityService.update("api::test.test", test.id, {
       data: {isActive: false}
+    })
+    return  await strapi.db.query("api::test.test").findOne({
+      where: {user_id: userId, isActive: true},
+      populate: true,
     })
   }
 }));
