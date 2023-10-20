@@ -110,7 +110,7 @@ export default factories.createCoreService('api::dictionary.dictionary', ({strap
       data: {isActive: false}
     })
     return  await strapi.db.query("api::test.test").findOne({
-      where: {user_id: userId, isActive: true},
+      where: {id: test.id},
       populate: true,
     })
   }
