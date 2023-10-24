@@ -62,6 +62,7 @@ export default {
         data: {
           translateLimit: 40,
           watchLimit: 15,
+          addToDictionaryLimit: 20
         },
       });
       const subscriptions = await strapi.db.query("api::subscription.subscription").findMany();

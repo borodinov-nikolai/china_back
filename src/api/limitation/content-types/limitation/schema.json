@@ -25,6 +25,9 @@
     "watchLimit": {
       "type": "integer",
       "default": 10
+    },
+    "addToDictionaryLimit": {
+      "type": "integer"
     }
   }
 }

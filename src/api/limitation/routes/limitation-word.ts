@@ -10,6 +10,15 @@ export default  {
         policies: [],
         middlewares: [],
       },
+    },
+    {
+      method: "POST",
+      path: "/limitation/addToDictionary",
+      handler: "limitation-word.addToDictionaryIncrement",
+      config: {
+        policies: [],
+        middlewares: [],
+      },
     }
   ],
 };

@@ -60,5 +60,33 @@ export default factories.createCoreService('api::limitation.limitation', ({ stra
     }
 
     return {message: `translateLimit is ${limit.translateLimit}`, translateLimit: limit.translateLimit, error: false}
+  },
+  async addToDictionaryIncrement(ctx) {
+    let limit = await strapi.db.query("api::limitation.limitation").findOne(
+      {where: {users_permissions_user: ctx.state.user.id}}
+    )
+    const subscriptions = await strapi.db.query("api::subscription.subscription").findMany({
+      where: {
+        user_id: ctx.state.user.id,
+        isActive: true,
+      },
+    });
+    if (!limit) {
+      limit = await strapi.entityService.create("api::limitation.limitation", {
+        data: {
+          users_permissions_user: ctx.state.user.id,
+        }
+      })
+    }
+    if (limit.addToDictionaryLimit <= 0) {
+      return {message: "addToDictionaryLimit is 0", error: true}
+    }
+    if (!subscriptions.length) {
+      limit = await strapi.entityService.update("api::limitation.limitation", limit.id, {
+        data: {addToDictionaryLimit: limit.addToDictionaryLimit - 1}
+      })
+    }
+
+    return {message: `addToDictionaryLimit is ${limit.addToDictionaryLimit}`, addToDictionaryLimit: limit.addToDictionaryLimit, error: false}
   }
 }));
