@@ -24,6 +24,20 @@ export default factories.createCoreService('api::dictionary.dictionary', ({strap
       dictionary.word = [];
     }
 
+    const limit = await strapi.db.query("api::limitation.limitation").findOne(
+      {where: {users_permissions_user: userId}}
+    )
+    const subscriptions = await strapi.db.query("api::subscription.subscription").findMany({
+      where: {
+        user_id: userId,
+        isActive: true,
+      },
+    });
+
+    if (!subscriptions.length && limit.addToDictionaryLimit === 0) {
+      return dictionary;
+    }
+
     dictionary.word.push(wordObject)
 
     await strapi.entityService.update('api::dictionary.dictionary', dictionary.id, {
