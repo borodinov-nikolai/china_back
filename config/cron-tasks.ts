@@ -60,9 +60,9 @@ export default {
     task: async ({strapi}) => {
       await strapi.db.query("api::limitation.limitation").updateMany({
         data: {
-          translateLimit: 40,
+          translateLimit: 10,
           watchLimit: 15,
-          addToDictionaryLimit: 20
+          addToDictionaryLimit: 5
         },
       });
       const subscriptions = await strapi.db.query("api::subscription.subscription").findMany();
