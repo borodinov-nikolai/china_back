@@ -210,7 +210,7 @@ export const segmentate = async (json) => {
   try {
     const segmentPromises = json.map(async (element) => {
       const response = await fetch(
-        "https://pinyin-word-api.vercel.app/api/segment",
+        "http://pinyin-word-api.vercel.app/api/segment",
         {
           method: "POST",
           headers: {
