@@ -2,18 +2,23 @@ import fs from "fs";
 import Parser, { getIam, segmentate, translateChineseSubtitles, rebuildAndRestart } from "../functions";
 
 export default {
-  exampleAction: async (ctx) => {
-    const srtFilePath = ctx.request.body.url;
+  exampleAction: async (ctx)  => {
+    const srtFilePath =  "public" + ctx.request.body.url;
+    const uploadDir = 'public/uploads';
     try {
-      const srtData = fs.readFileSync(`public${srtFilePath}`, "utf-8");
+      fs.readdirSync(uploadDir).forEach(file => {
+        const filePath = uploadDir + "/" + file;
+        if (filePath !== srtFilePath && filePath !== 'public/uploads/.gitkeep') {
+          fs.unlinkSync(filePath); // Удаляем файл, если это не тот, что в srtFilePath
+        }
+      });
+      const srtData = fs.readFileSync(srtFilePath, "utf-8");
       const parser = new Parser();
       const json = parser.fromSrt(srtData);
       const segmentated = await segmentate(json);
       const { iamToken } = await getIam()
       await translateChineseSubtitles(json, iamToken)
-      if (fs.existsSync("public/uploads/zh_subtitles.json")) {
-        fs.unlinkSync("public/uploads/zh_subtitles.json");
-      }
+
       fs.writeFile(
         "public/uploads/zh_subtitles.json",
         JSON.stringify(segmentated, null, 2),

@@ -110,19 +110,19 @@ class Parser {
     // if str is shorter than how_many_digit, pad with 0
     // if str is longer than how_many_digit, slice from the beginning
     // Example:
-  
+
     Input: fixed_str_digit(3, '100')
     Output: 100
     Explain: unchanged, because "100" is 3 digit
-  
+
     Input: fixed_str_digit(3, '50')
     Output: 500
     Explain: pad end with 0
-  
+
     Input: fixed_str_digit(3, '50', false)
     Output: 050
     Explain: pad start with 0
-  
+
     Input: fixed_str_digit(3, '7771')
     Output: 777
     Explain: slice from beginning
@@ -264,7 +264,7 @@ async function generateJWT() {
 
 export async function getIam() {
   try {
-    await generateJWT() 
+    await generateJWT()
     const response = await fetch(
       "https://iam.api.cloud.yandex.net/iam/v1/tokens",
       {
@@ -302,11 +302,11 @@ export async function translateTexts(texts, targetLanguageCode, iam_token) {
           body: JSON.stringify({ targetLanguageCode, texts, folderId: folder_id }),
         }
       );
-  
+
       if (!response.ok) {
         throw new Error(`Failed to fetch data: ${response.statusText}`);
       }
-  
+
       const data = await response.json();
       return data.translations;
   } catch (error) {
@@ -317,11 +317,11 @@ export async function translateTexts(texts, targetLanguageCode, iam_token) {
 
 export async function translateChineseSubtitles(chineseSubtitles, iam_token) {
   const chineseTexts = chineseSubtitles.map(subtitle => subtitle.text);
-  
+
   const MAX_TEXT_STRINGS = 500;
   const totalTexts = chineseTexts.length;
   let currentIndex = 0;
-  
+
   const translatedTextsEn = [];
   const translatedTextsRu = [];
 
@@ -348,13 +348,6 @@ export async function translateChineseSubtitles(chineseSubtitles, iam_token) {
 
   const filePathEn = `public/uploads/${target_language_en}_subtitles.json`;
   const filePathRu = `public/uploads/${target_language_ru}_subtitles.json`;
-
-  if (fs.existsSync(filePathEn)) {
-    fs.unlinkSync(filePathEn);
-  }
-  if (fs.existsSync(filePathRu)) {
-    fs.unlinkSync(filePathRu);
-  }
 
   fs.writeFileSync(filePathEn, JSON.stringify(translatedSubtitlesEn, null, 2));
   fs.writeFileSync(filePathRu, JSON.stringify(translatedSubtitlesRu, null, 2));
