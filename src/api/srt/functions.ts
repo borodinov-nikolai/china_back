@@ -3,7 +3,7 @@ import jose from "node-jose"
 import { private_key } from "./authorized_key.json";
 import fs from 'fs'
 import { Client } from "ssh2";
-
+import hanzi from 'hanzi'
 interface Line {
   id: string;
   startTime: string;
@@ -207,30 +207,12 @@ class Parser {
 }
 
 export const segmentate = async (json) => {
+  hanzi.start();
   try {
-    const segmentPromises = json.map(async (element) => {
-      const response = await fetch(
-        "http://pinyin-word-api.vercel.app/api/segment",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ text: element.text }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Ошибка запроса к API");
-      }
-
-      const data = await response.json();
-      const segments = data.segment;
-
+    const segments = json.map((element) => {
+      const segments = hanzi.segment(element.text);
       return { ...element, text: segments };
     });
-
-    const segments = await Promise.all(segmentPromises);
     return segments;
   } catch (error) {
     console.error("Что-то пошло не по плану:", error);
