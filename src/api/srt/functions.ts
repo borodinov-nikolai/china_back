@@ -17,49 +17,40 @@ interface Line {
 export const rebuildAndRestart = async () => {
   try {
     const conn = new Client();
-    await new Promise<void>((resolve, reject) => { // Добавляем аргумент void
-      conn
-        .on("ready", () => {
-          conn.exec("cd .. && bash /rebuild.sh", (err, stream) => {
-            if (err) {
-              reject(err);
-            } else {
-              stream
-                .on("close", (code, signal) => {
-                  if (code === 0) {
-                    console.log({ message: "Скрипт успешно выполнен" });
-                    resolve(); // Разрешаем промис при успешном выполнении
-                  } else {
-                    console.log({
-                      message: "Произошла ошибка при выполнении скрипта",
-                    });
-                    reject(new Error("Ошибка при выполнении скрипта"));
-                  }
-                  conn.end();
-                })
-                .on("data", (data) => {
-                  console.log("STDOUT: " + data);
-                })
-                .stderr.on("data", (data) => {
-                  console.log("STDERR: " + data);
-                  reject(new Error("Ошибка при выполнении скрипта"));
+
+    conn
+      .on("ready", () => {
+        conn.exec("cd .. && bash /restart.sh", (err, stream) => {
+          if (err) throw err;
+          stream
+            .on("close", (code, signal) => {
+              if (code === 0) {
+                console.log({ message: "Скрипт успешно выполнен" });
+              } else {
+                console.log({
+                  message: "Произошла ошибка при выполнении скрипта",
                 });
-            }
+              }
+              conn.end();
+            })
+            .on("data", (data) => {
+              console.log("STDOUT: " + data);
+            })
+            .stderr.on("data", (data) => {
+            console.log("STDERR: " + data);
           });
-        })
-        .connect({
-          host: "91.210.169.58",
-          username: "root",
-          password: "ugY8#R5RbvT8@m",
         });
-    });
+      })
+      .connect({
+        host: "91.186.196.33",
+        username: "root",
+        password: "y@h+pM7EYswAaF",
+      });
   } catch (error) {
     console.error("Ошибка:", error);
     console.log({ message: "Произошла ошибка при выполнении скрипта" });
-    throw error;
   }
 };
-
 class Parser {
   seperator = ",";
 
