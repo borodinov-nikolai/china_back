@@ -188,6 +188,7 @@ class Parser {
     const end_of_line = "\r\n";
     for (var i = 0; i < data.length; i++) {
       var s = data[i];
+      console.log(data[i])
       res += s.id + end_of_line;
       res += s.startTime + " --> " + s.endTime + end_of_line;
       res += s.text.replace("\n", end_of_line) + end_of_line + end_of_line;
@@ -212,8 +213,8 @@ export const segmentate = async (json) => {
 
 
 const key = private_key;
-const serviceAccountId = "aje7u1p1q91jajpv470d";
-const keyId = "ajed8nv7r2a8vn1drnbq";
+const serviceAccountId = "ajeu4bt9o9bd4ahv2cg1";
+const keyId = "ajeuup0sut6uta77q393";
 const now = Math.floor(new Date().getTime() / 1000);
 let jwt;
 
@@ -254,7 +255,7 @@ export async function getIam() {
   }
 }
 
-const folder_id = "b1g2sp6gtvvlgkcr04of";
+const folder_id = "b1gperitjpakle5ic5m9";
 const target_language_en = "en"; // Целевой язык en
 const target_language_ru = "ru"; // Целевой язык ru
 
