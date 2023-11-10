@@ -67,6 +67,8 @@ export default factories.createCoreController(
     },
     async payOrder(ctx) {
       const payment = ctx.request.body.object
+      console.log(payment)
+
       if (payment.status == 'succeeded') {
         const order = await strapi.query('api::order.order').update({
           where: { payment_id: payment.id },
