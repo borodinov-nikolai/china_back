@@ -213,8 +213,8 @@ export const segmentate = async (json) => {
 
 
 const key = private_key;
-const serviceAccountId = "ajeu4bt9o9bd4ahv2cg1";
-const keyId = "ajeuup0sut6uta77q393";
+const serviceAccountId = process.env.SERVICE_ACCOUNT_ID;
+const keyId = process.env.KEY_ID;
 const now = Math.floor(new Date().getTime() / 1000);
 let jwt;
 
@@ -255,7 +255,7 @@ export async function getIam() {
   }
 }
 
-const folder_id = "b1gperitjpakle5ic5m9";
+const folder_id = process.env.FOLDER_ID;
 const target_language_en = "en"; // Целевой язык en
 const target_language_ru = "ru"; // Целевой язык ru
 
