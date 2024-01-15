@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_guide_guide_steps",
+  "info": {
+    "displayName": "guide_step"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "text": {
+      "type": "richtext"
+    }
+  }
+}

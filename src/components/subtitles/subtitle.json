@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_subtitles_subtitles",
+  "info": {
+    "displayName": "subtitle",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    }
+  }
+}

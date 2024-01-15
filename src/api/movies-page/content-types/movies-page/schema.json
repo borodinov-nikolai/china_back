@@ -1,0 +1,29 @@
+{
+  "kind": "singleType",
+  "collectionName": "movies_pages",
+  "info": {
+    "singularName": "movies-page",
+    "pluralName": "movies-pages",
+    "displayName": "MoviesPage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "metadata": {
+      "type": "component",
+      "repeatable": false,
+      "component": "metadata.meta",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}
